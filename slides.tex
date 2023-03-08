@@ -1,0 +1,42 @@
+\documentclass{beamer}
+\usepackage{minted}
+\usepackage{epigraph}
+\usepackage{subfig}
+\usepackage{tikz}
+\usetheme{focus}
+
+\title{Algoritmo di Shor}
+\subtitle{Quantum Computer Programming}
+\author{Davide Carnemolla}
+\titlegraphic{\includegraphics[scale=0.13]{images/logo.pdf}}
+\institute{Dipartimento di Matematica e Informatica \\ Università degli Studi di Catania}
+\date{A.A. 2022/2023}
+
+\begin{document}
+    \begin{frame}
+        \maketitle
+    \end{frame}
+    
+    \section{Proprietà di sicurezza}
+    \begin{frame}{Proprietà di 1° livello }
+        \begin{columns}[t, onlytextwidth]
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=1.5cm,keepaspectratio]{images/secrecy.pdf}
+                \vfill
+                \textbf{Confidenzialità} \\ (Segretezza)
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=1.5cm,keepaspectratio]{images/integrity.pdf}
+                \vfill
+                \textbf{Integrità}
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=1.5cm,keepaspectratio]{images/auth.pdf}
+                \vfill
+                \textbf{Autenticazione}
+        \end{columns}
+    \end{frame}
+    
+    
+\end{document}
