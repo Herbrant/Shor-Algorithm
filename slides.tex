@@ -20,11 +20,33 @@
     \section{Integer Factorization}
 
     \begin{frame}{The problem}
+        \centering
+        \includegraphics[height=2cm,keepaspectratio]{images/problem.pdf}
+        \vspace{1cm}
+        \begin{block}{Definition}
+            Given an integer $N$, the goal of the \textit{integer factorization problem} is to find two primes, $p$ and $q$, such that $N = p \cdot q$.
+        \end{block}
+        \begin{exampleblock}{Example}
+            Given $N = 143$ we know that the solution is the pair $(13, 11).$
+        \end{exampleblock}
         
     \end{frame}
 
     \begin{frame}{RSA}
-
+        \centering
+        \begin{block}{RSA}
+            $(pk,sk) \leftarrow$ \textbf{keygen}(): \hspace{0.05cm} given two primes $p$ and $q$ \\ 
+                \hspace{3.7cm} let $n = pq$ \\ 
+                \hspace{3.7cm} choose $e,d$ such that $e \cdot d \equiv 1 \; \text{mod} \; \phi(n)$ \\
+                \hspace{3.7cm} \textbf{return} $pk = (n,e), \, sk = (n, d)$ \\
+            \vspace{0.5cm}
+            $c \leftarrow \textbf{enc}_{pk}(m) = m^e \; mod \; n$ \\
+            \vspace{0.5cm}
+            $m \leftarrow \textbf{dec}_{sk}(m) = c^d \; mod \; n$
+        \end{block}
+        \begin{alertblock}{RSA's Security}
+            The RSA's Problem can be reduced to the Integer Factorization's Problem.
+        \end{alertblock}
     \end{frame}
 
     \section{Solution in the classical model}
