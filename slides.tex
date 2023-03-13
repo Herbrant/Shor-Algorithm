@@ -3,6 +3,7 @@
 \usepackage{epigraph}
 \usepackage{subfig}
 \usepackage{tikz}
+\usepackage{amsmath}
 \usetheme{focus}
 
 \title{Shor's Algorithm}
@@ -50,18 +51,81 @@
     \end{frame}
 
     \section{Solution in the classical model}
-
+    \begin{frame}{Brute Force}
+        \begin{alertblock}{Brute Force strategy}
+            The brute force algorithm goes through all primes $p$ up to $\sqrt{N}$ and checks whether $p$ divides $N$.
+        \end{alertblock}
+        \begin{exampleblock}{Complexity}
+            In the worst case, this would take time roughly , which is exponential in the number of digits $d = \log_2N$.
+        \end{exampleblock}
+    \end{frame}
+    \begin{frame}{Quadratic Sieve}
+        \begin{alertblock}{Quadratic Sieve Algorithm}
+            A more efficient algorithm, known as the quadratic sieve, attempts to construct integers $a,b$ such that $a^2-b^2$ is a multiple of $N$.
+            Once such $a,b$ are found, one checks whether $a b$ have common factors with $N$.
+        \end{alertblock}
+        \begin{exampleblock}{Complexity}
+            The quadratic sieve method has asymptotic runtime exponential in $\sqrt{d}$, where $d = \log_2N$ is the number of digits of $N$.
+        \end{exampleblock}
+    \end{frame}
     \begin{frame}{General Number Field Sieve}
-        
+        \begin{alertblock}{GNFS}
+            The Generic Number Field Sieve is most efficient classical factoring algorithm. The idea 
+        \end{alertblock}
+        \begin{exampleblock}{GNFS - Complexity}
+            The number of digit of N is equals to $d = \log_2N$.
+            The algorithm's complexity can be simplified as follows
+            $$\mathcal{O}(exp(const \times d^{1/3}))$$
+        \end{exampleblock}
     \end{frame}
 
-    \begin{frame}{General Number Field Sieve: Complexity}
-        
+    \section{The Period Finding Problem}
+    \begin{frame}{The period finding problem}
+        \begin{alertblock}{Definition of the problem}
+            Given integers $N$ and $a$, find the smallest positive integer $r$ such that
+            $$ a^r \equiv 1 \; mod \; N$$
+            The number $r$ is called the period of $a$ modulo $N$.
+        \end{alertblock}
+
+        \begin{exampleblock}{Example}
+            Suppose $N = 15$ and $a=7$ then
+            \begin{equation*}
+                    7^2 \equiv 4 \; mod \; 15, \quad
+                    7^3 \equiv 13 \; mod \; 15, \quad
+                    7^4 \equiv 1 \; mod \; 15 
+            \end{equation*}
+            That is, $7$ has period $4$ modulo $15$.
+        \end{exampleblock}
     \end{frame}
+    
 
-    \section{Period finding}
+    \begin{frame}{From factoring to period finding}
+        \begin{columns}[t, onlytextwidth]
+            \column{0.2\textwidth}
+            \centering
+            \Huge $(N, a)$
 
-    \section{From factoring to period finding}
+            \column{0.2\textwidth}
+            \centering
+            \Huge $\rightarrow$
+
+            \column{0.2\textwidth}
+            \centering
+            \includegraphics[height=2.5cm,keepaspectratio]{images/robot.pdf}
+            \vfill
+            \footnotesize \textbf{period-finding machine}
+
+            \column{0.2\textwidth}
+            \centering
+            \Huge $\rightarrow$
+
+            \column{0.2\textwidth}
+            \centering
+            \Huge $r$ 
+        \end{columns}
+        \vspace{1.5cm}
+        where $r$ is the period of $a$ modulo $N$.
+    \end{frame}
 
     \section{Shor's Algorithm}
 
