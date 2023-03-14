@@ -55,6 +55,8 @@
 
     \section{Solution in the classical model}
     \begin{frame}{Brute Force}
+        \centering
+        \includegraphics[height=3.5cm, keepaspectratio]{images/turbo.png}
         \begin{alertblock}{Brute Force strategy}
             The brute force algorithm goes through all primes $p$ up to $\sqrt{N}$ and checks whether $p$ divides $N$.
         \end{alertblock}
@@ -63,17 +65,21 @@
         \end{exampleblock}
     \end{frame}
     \begin{frame}{Quadratic Sieve}
+        \centering
+        \includegraphics[height=2.7cm,keepaspectratio]{images/bradipo.png}
         \begin{alertblock}{Quadratic Sieve Algorithm}
             A more efficient algorithm, known as the quadratic sieve, attempts to construct integers $a,b$ such that $a^2-b^2$ is a multiple of $N$.
-            Once such $a,b$ are found, one checks whether $a b$ have common factors with $N$.
+            Once such $a,b$ are found, one checks whether $a \pm b$ have common factors with $N$.
         \end{alertblock}
         \begin{exampleblock}{Complexity}
             The quadratic sieve method has asymptotic runtime exponential in $\sqrt{d}$, where $d = \log_2N$ is the number of digits of $N$.
         \end{exampleblock}
     \end{frame}
     \begin{frame}{General Number Field Sieve}
+        \centering
+        \includegraphics[height=2.5cm, keepaspectratio]{images/turtle.png}
         \begin{alertblock}{GNFS}
-            The Generic Number Field Sieve is most efficient classical factoring algorithm. The idea 
+            The Generic Number Field Sieve is most efficient classical factoring algorithm. The idea ...
         \end{alertblock}
         \begin{exampleblock}{GNFS - Complexity}
             The number of digit of N is equals to $d = \log_2N$.
@@ -114,7 +120,7 @@
 
             \column{0.2\textwidth}
             \centering
-            \includegraphics[height=2.5cm,keepaspectratio]{images/robot.pdf}
+            \includegraphics[height=3cm,keepaspectratio]{images/robot.png}
             \vfill
             \footnotesize \textbf{period-finding machine}
 
@@ -256,6 +262,8 @@
     \end{frame}
 
     \section{Shor's Algorithm}
+    \begin{frame}{}
+    \end{frame}
 
     \section{Implementation}
     
