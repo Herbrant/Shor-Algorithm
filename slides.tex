@@ -4,7 +4,10 @@
 \usepackage{subfig}
 \usepackage{tikz}
 \usepackage{amsmath}
+\usepackage{color, colortbl}
 \usetheme{focus}
+
+\definecolor{orangered}{rgb}{1,0.45, 0}
 
 \title{Shor's Algorithm}
 \subtitle{Quantum Computer Programming}
@@ -83,7 +86,7 @@
     \begin{frame}{The period finding problem}
         \begin{alertblock}{Definition of the problem}
             Given integers $N$ and $a$, find the smallest positive integer $r$ such that
-            $$ a^r \equiv 1 \; mod \; N$$
+            $$ a^r \equiv 1 \; mod \; N \iff N \; | \; a^r - 1$$
             The number $r$ is called the period of $a$ modulo $N$.
         \end{alertblock}
 
@@ -125,6 +128,131 @@
         \end{columns}
         \vspace{1.5cm}
         where $r$ is the period of $a$ modulo $N$.
+    \end{frame}
+
+    \begin{frame}{From factoring to period finding}
+        \textbf{Assumption}: $N$ has only two distinct prime factors, $N = pq$.
+        \vspace{0.5cm} 
+        \begin{alertblock}{Experiment}
+            \begin{enumerate}
+                \item $a \overset{\$}{\leftarrow} [2, N-1]$ such that $gcd(N,a) = 1$
+                \item $r \leftarrow \text{\textbf{period-finding-machine}}(N,a)$
+                \item go to 1 until $r$ is even
+            \end{enumerate}
+        \end{alertblock}
+        \vspace{0.5cm} 
+        \begin{block}{Note}
+            It can be shown that a significant fraction of all integers $a$ have
+            an even period, so on average one needs only a few repetitions.
+        \end{block}
+    \end{frame}
+    \begin{frame}{Example}
+        \begin{exampleblock}{Table of iterations}
+            Suppose $N = 15$.
+            \begin{center}
+                \begin{tabular}{ |c|c|c|c| } 
+                    \hline
+                    $a$ & $r$ & $gcd(15, a^{r/2} - 1)$ & $gcd(15, a^{r/2} + 1)$ \\ 
+                    \hline
+                    1 & 1 & & \\ 
+                    \hline
+                    2 & 4 & 3 & 5 \\ 
+                    \hline
+                    4 & 2 & 3 & 5 \\
+                    \hline
+                    7 & 4 & 3 & 5 \\
+                    \hline
+                    8 & 4 & 3 & 5 \\
+                    \hline
+                    11 & 2 & 5 & 3 \\
+                    \hline
+                    13 & 4 & 3 & 5 \\
+                    \hline
+                    14 & 2 & 1 & 15 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{What we found}
+        We have found some pair $(r,a)$ such that
+        \begin{enumerate}
+            \item $r$ is even
+            \item $r$ is the smallest integer such that $a^r - 1$ is a multiple of $N$
+        \end{enumerate}
+        \vspace{0.75cm}
+        Also, we know that
+        $$a^r-1 = (a^{r/2} - 1)(a^{r/2} + 1)$$
+
+        \vspace{0.5cm}
+        The above shows that $a^{r/2} - 1$ is not a multiple of $N$, otherwise the period
+        of $a$ would be $r/2$.
+    \end{frame}
+    \begin{frame}{What we found}
+        \textbf{Assumption}: $a^{r/2} + 1$ is not a multiple of $N$. 
+        \begin{center}
+           $\implies a^{r/2} \pm 1$ is not a multiple of $N$, but their product is. 
+        \end{center}
+        
+        \vspace{0.5cm}
+
+        This is possible only if
+
+        \begin{center}
+          $p$ is a prime factor of $a^{r/2} - 1 \wedge q$ is a prime factor of $a^{r/2} + 1$ \\ 
+        (or vice versa)  
+        \end{center}
+
+        \vspace{0.75cm} 
+        We can thus find find $p,q$ by computing
+        $$ gcd(N, a^{r/2} \pm 1)$$
+    \end{frame}
+
+    \begin{frame}{What we found: the unlucky case}
+        When 
+        \begin{center}
+            $a^{r/2} + 1$ is a multiple of $N$
+        \end{center}
+        we are in the unlucky case
+        \begin{center}
+          $\implies$ we give up and try a diffrent integer $a$.  
+        \end{center}
+        
+        \vspace{0.75cm}
+        \begin{alertblock}{Fact}
+            It can be shown that the unlucky integers $a$ are not too
+            frequent, so on average, only two calls to the period-finding machine are sufficient to factor $N$.
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}{Example: the unlucky case}
+        \begin{exampleblock}{Table of iterations}
+            Suppose $N = 15$.
+            \begin{center}
+                \begin{tabular}{ |c|c|c|c| } 
+                    \hline
+                    $a$ & $r$ & $gcd(15, a^{r/2} - 1)$ & $gcd(15, a^{r/2} + 1)$ \\ 
+                    \hline
+                    1 & 1 & & \\ 
+                    \hline
+                    2 & 4 & 3 & 5 \\ 
+                    \hline
+                    4 & 2 & 3 & 5 \\
+                    \hline
+                    7 & 4 & 3 & 5 \\
+                    \hline
+                    8 & 4 & 3 & 5 \\
+                    \hline
+                    11 & 2 & 5 & 3 \\
+                    \hline
+                    13 & 4 & 3 & 5 \\
+                    \hline
+                    \rowcolor{orangered} 14 & 2 & 1 & 15 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{exampleblock}
     \end{frame}
 
     \section{Shor's Algorithm}
