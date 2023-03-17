@@ -2,9 +2,10 @@
 \usepackage{minted}
 \usepackage{epigraph}
 \usepackage{subfig}
+\usepackage{pgfplots}
 \usepackage{tikz}
-\usepackage{amsmath}
 \usepackage{color, colortbl}
+
 \usetheme{focus}
 
 \definecolor{orangered}{rgb}{1,0.45, 0}
@@ -289,6 +290,47 @@
     \end{frame}
 
     \begin{frame}{Quantum part: period-finding subroutine}
+        The main idea is to use the quantum phase estimation on the unitay
+        operator $$ U|y \rangle \equiv ay \; mod \; N \rangle$$
+
+        \begin{exampleblock}{Example}
+            With $a = 2$ and $N = 15$
+            \begin{align*}
+                U|1 \rangle &= |2 \rangle \\
+                U^2|1 \rangle &= |4 \rangle \\
+                U^3|1 \rangle &= |8 \rangle \\
+                U^4|1 \rangle &= |1 \rangle
+            \end{align*}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{Example}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel={Number of applications of U},
+                ylabel={End state of register},
+                xtick={0,4,8,12,15},
+                ytick={0, 1, 2, 4, 8},
+                ytick pos= left,
+                xtick pos= left,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+
+            \addplot[
+                color=purple,
+                mark=x,
+            ]
+            coordinates {
+                (0,1)(1,2)(2,4)(3,8)(4,1)(5,2)(6,4)(7,8)(8,1)(9,2)(10,4)(11,8)(12,1)(13,2)(14,4)(15,8)
+            };
+
+            \draw[stealth-stealth, thick](0,1) -- (40,1) node[midway,above]{\small $r$};
+
+
+            \end{axis}
+        \end{tikzpicture}
     \end{frame}
 
     \section{Implementation}
