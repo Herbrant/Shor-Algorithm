@@ -294,11 +294,11 @@
         operator $$ U|y \rangle \equiv ay \; mod \; N \rangle$$
 
         \begin{exampleblock}{Example}
-            With $a = 2$ and $N = 15$
+            With $a = 7$ and $N = 15$
             \begin{align*}
-                U|1 \rangle &= |2 \rangle \\
+                U|1 \rangle &= |7 \rangle \\
                 U^2|1 \rangle &= |4 \rangle \\
-                U^3|1 \rangle &= |8 \rangle \\
+                U^3|1 \rangle &= |13 \rangle \\
                 U^4|1 \rangle &= |1 \rangle
             \end{align*}
         \end{exampleblock}
@@ -311,7 +311,7 @@
                 xlabel={Number of applications of U},
                 ylabel={End state of register},
                 xtick={0,4,8,12,15},
-                ytick={0, 1, 2, 4, 8},
+                ytick={0, 1, 4, 7, 13},
                 ytick pos= left,
                 xtick pos= left,
                 ymajorgrids=true,
@@ -323,7 +323,7 @@
                 mark=x,
             ]
             coordinates {
-                (0,1)(1,2)(2,4)(3,8)(4,1)(5,2)(6,4)(7,8)(8,1)(9,2)(10,4)(11,8)(12,1)(13,2)(14,4)(15,8)
+                (0,1)(1,7)(2,4)(3,13)(4,1)(5,7)(6,4)(7,13)(8,1)(9,7)(10,4)(11,13)(12,1)(13,7)(14,4)(15,13)
             };
 
             \draw[stealth-stealth, thick](0,1) -- (40,1) node[midway,above]{\small $r$};
@@ -331,6 +331,9 @@
 
             \end{axis}
         \end{tikzpicture}
+    \end{frame}
+
+    \begin{frame}{}
     \end{frame}
 
     \section{Implementation}
