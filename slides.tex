@@ -336,7 +336,43 @@
         \includegraphics[height=1.6cm, keepaspectratio]{images/shor.pdf}
     \end{frame}
 
-    \section{Implementation}
+    \begin{frame}{Period-Finding Subroutine}
+        So a superposition of the states in this cycle $|u_0 \rangle$ would be an
+        eigenstate of $U$:
+        $$ |u_0\rangle = \frac{1}{\sqrt{r}} \sum_{k=0}^{r-1} |a^k \; mod \; N \rangle$$
+
+        \begin{exampleblock}{Example with $a=7, N=15$}
+            \begin{align*}
+                |u_0\rangle &= \frac{1}{2} \, (|1\rangle + |7\rangle + |4\rangle + |13\rangle) \\
+                U|u_0\rangle &= \frac{1}{2} \, (U|1\rangle + U|7\rangle + U|4\rangle + U|13\rangle) \\
+                &= \frac{1}{2} \, (|7\rangle + |4\rangle + |13\rangle + |1\rangle) = |u_0\rangle
+            \end{align*}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{The phase}
+        A more interesting eigenstate could be one in which the phase is different for each of these computational basis states.
+
+        For instance,
+        
+        \begin{align*}
+            |u_1\rangle &= \frac{1}{\sqrt{r}} \sum_{k=0}^{r-1} e^{-\frac{2 \pi i k}{r}} | a^k \; mod \; N \rangle \\
+            U|u_1\rangle &= e^{\frac{2 \pi i}{r} | u_1}
+        \end{align*}
+    \end{frame}
+
+    \begin{frame}{example}
+        \begin{exampleblock}{Example $a = 7, N=15$}
+            \begin{align*}
+                |u_1\rangle &= \frac{1}{2} \, (|1\rangle + e^{-\frac{2 \pi i}{4}}|7 + e^{-\frac{4 \pi i}{4}}|4\rangle + e^{-\frac{6 \pi i}{4}}|13\rangle) \\
+                U|u_1\rangle &= \frac{1}{2} \, (|7\rangle + e^{-\frac{2 \pi i}{4}}|4 + e^{-\frac{4 \pi i}{4}}|13\rangle + e^{-\frac{6 \pi i}{4}}|1\rangle) \\
+                U|u_1\rangle &= e^{\frac{2 \pi i}{4}} \cdot \frac{1}{2} \, (|e^{-\frac{2 \pi i}{4}}|7 + e^{-\frac{4 \pi i}{4}}|4\rangle + e^{-\frac{6 \pi i}{4}}|13\rangle + e^{-\frac{8 \pi i}{4}}|1\rangle) \\
+                U|u_1\rangle &= e^{\frac{2 \pi i}{4}}|u_1\rangle
+            \end{align*}
+        \end{exampleblock}
+    \end{frame}
+
+    %\section{Implementation}
     
     
 \end{document}
