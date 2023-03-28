@@ -80,8 +80,9 @@
         \centering
         \includegraphics[height=2.5cm, keepaspectratio]{images/turtle.png}
         \begin{alertblock}{GNFS}
-            The General Number Field Sieve is the most efficient classical factoring algorithm. The idea ...
+            The General Number Field Sieve is the most efficient classical factoring algorithm. The main idea is the use of smooth numbers.
         \end{alertblock}
+
         \begin{exampleblock}{GNFS - Complexity}
             The number of digit of N is equals to $d = \log_2N$.
             The algorithm's complexity can be simplified as follows
@@ -350,7 +351,7 @@
         \end{exampleblock}
     \end{frame}
 
-    \begin{frame}{The phase}
+    \begin{frame}{Case $u_1$}
         A more interesting eigenstate could be one in which the phase is different for each of these computational basis states.
 
         For instance,
@@ -361,7 +362,7 @@
         \end{align*}
     \end{frame}
 
-    \begin{frame}{example}
+    \begin{frame}{Example}
         \begin{exampleblock}{Example $a = 7, N=15$}
             \begin{align*}
                 |u_1\rangle &= \frac{1}{2} \, (|1\rangle + e^{-\frac{2 \pi i}{4}}|7 + e^{-\frac{4 \pi i}{4}}|4\rangle + e^{-\frac{6 \pi i}{4}}|13\rangle) \\
@@ -370,6 +371,83 @@
                 U|u_1\rangle &= e^{\frac{2 \pi i}{4}}|u_1\rangle
             \end{align*}
         \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{Case $u_s$}
+        We can see that $r$ appears in the denominator of the phase. This is interesting.
+        Generalizing the idea, we obtain
+
+        \begin{align*}
+            |u_s\rangle &= \frac{1}{\sqrt{r}} \sum_{k=0}^{r-1} e^{-\frac{2 \pi i s k}{r}}|a^k \; mod \; N\rangle \\
+            U|u_s\rangle &= e^{\frac{2 \pi i s}{r}}|u_s\rangle
+        \end{align*}
+
+        We now have a unique eigenstate for each integer value of $s$ where
+        $$0 \leq s \leq r - 1$$
+    \end{frame}
+
+    \begin{frame}{The phase}
+        \begin{alertblock}{Fact}
+            If we sum up all the eigenstates, the different phases cancel out all
+            computational basis states except $|1\rangle$
+
+            $$ \frac{1}{r} \sum_{s=0}^{r-1}|u_s\rangle = |1\rangle $$
+        \end{alertblock}
+
+        If we apply the Quantum Phase Estimation on $U$ using the state $|1\rangle$, we will measure a phase
+        $$ \phi = \frac{s}{r}$$
+
+        where $s$ is the random number between $0$ and $r-1$.
+    \end{frame}
+
+    \begin{frame}{Continued fraction}
+        Using the Quantum Phase Estimation we can find the phase $\phi$ but not $r$.
+        We can find $r$ using the Continued fractions algorithm.
+        \hspace{1cm}
+        \begin{alertblock}{Definition}
+            Let $a_0,a_1,\dots,a_k \in \mathbb{Z}$ such that $\forall i \in \{1,\dots,k\} a_i \geq 0$. Then the expression
+            $$r = a_0 + \frac{1}{a_1 + \frac{1}{\dots + \frac{1}{a_k}}}$$
+            is called the \textbf{continued fraction rapresentation} of the rational number $r$ and is denoted shortly as $r = [a_0,a_1,\dots,a_k]$
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}{Continued fraction: algorithm}
+        \begin{alertblock}{Continued Fractions Algorithm}
+            \textbf{Input}: $\phi, e = 0.0001$ \\
+            \textbf{Output}: s,r
+            \vspace{0.5cm}
+            \begin{enumerate}
+                \item $A \leftarrow [\lfloor \phi \rfloor]$
+                \item \textbf{while} $\phi - \lfloor \phi \rfloor > e$ \textbf{then} \\ \hspace{0.5cm} $\phi \leftarrow 1/ (\phi - \lfloor \phi \rfloor)$ \\ \hspace{0.5cm} \textbf{append} $\lfloor \phi \rfloor$ to $A$
+                \item $p \leftarrow [0,1], q \leftarrow [1,0]$
+                \item \textbf{for each} $it$ in $A$ \textbf{do} \\ 
+                    \hspace{0.5cm} \textbf{append} $p[len(p)] * it + p[len(p) - 1]$ \textbf{to} $p$ \\
+                    \hspace{0.5cm} \textbf{append} $q[len(q)] * it + q[len(q) - 1]$ \textbf{to} $q$
+                \item \textbf{return} $p[len(p)], q[len(q)]$
+                
+            \end{enumerate}
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}{Example}
+        \begin{exampleblock}{Example $r = \frac{5}{3}$}
+            $$r = [1,1,2] = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{2}}}$$
+
+            \begin{align*}
+                &P= [0, 1, 1, 2, 5] \implies p = 5 &Q= [1, 0, 1, 1, 3] \implies q = 3
+            \end{align*}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{About complexity}
+        \centering
+        \includegraphics[height=3cm, keepaspectratio]{images/cars.png}
+        \vspace{0.5cm}
+        \begin{block}{Complexity}
+            The number of digit of $N$ is equals to $d = \log_2N$. The Shor's Algorithm complexity
+            can be simplified as follows
+            $$ \mathcal{O}(const \times d^3)$$
+        \end{block}
     \end{frame}
 
     %\section{Implementation}
