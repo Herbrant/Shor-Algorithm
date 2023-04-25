@@ -279,7 +279,7 @@
             \begin{enumerate}
                 \item $a \overset{\$}{\leftarrow} [2, N-1]$
                 \item Compute $K = gcd(N,a)$
-                \item \textbf{if} $K = 1 $ ($\implies K$ is nontrivial factor of $N$) \textbf{then}
+                \item \textbf{if} $K = 1 $ \textbf{then}
                 \item \hspace{0.5cm} $r \leftarrow \text{quantum-period-finding-subroutine}(N,a)$
                 \item \hspace{0.5cm} \textbf{if} ($r$ is odd $\; || \; a^{r/2} \equiv -1 \; mod \; N$)   \textbf{then} \\ \hspace{1cm} go to 1
                 \item \hspace{0.5cm} \textbf{else} \\ \hspace{1cm} \textbf{return} $gcd(a^{r/2} + 1, N), gcd(a^{r/2} - 1, N)$
